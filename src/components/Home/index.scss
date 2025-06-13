@@ -1,0 +1,160 @@
+.home-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow-y: auto;
+
+  .home-content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; // align to top
+    gap: 40px;
+    padding: 60px 5%; // give top padding so it's not touching the top
+    box-sizing: border-box;
+    flex-wrap: wrap; // helps on smaller screens
+  }
+
+  .text-zone {
+    width: 50%;
+    max-width: 600px;
+    color: white;
+    font-size: 24px;
+    line-height: 1.4;
+    font-family: sans-serif;
+    overflow: visible;
+    position: relative;
+  }
+
+  .styled-hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, #7626c7, #ddb6f5, #7626c7);
+    margin: 30px 0 30px 40px;
+    border-radius: 10px;
+    opacity: 0.8;
+    animation: fadeIn 1s 1.7s backwards;
+  }
+
+  h1 {
+    color: #fff;
+    font-size: 43px;
+    margin: 0;
+    font-family: "Lucida Handwriting", cursive;
+    font-weight: 400;
+
+    // &::before {
+    //   .styled-hr {
+    //     border: none;
+    //     height: 2px;
+    //     background: linear-gradient(to right, #7626c7, #ddb6f5, #7626c7);
+    //     margin: 30px 0;
+    //     border-radius: 10px;
+    //     opacity: 0.8;
+    //     animation: fadeIn 1s 1.7s backwards;
+    //   }
+    // }
+
+    // &::after {
+    //   .styled-hr {
+    //     border: none;
+    //     height: 2px;
+    //     background: linear-gradient(to right, #7626c7, #ddb6f5, #7626c7);
+    //     margin: 30px 0;
+    //     border-radius: 10px;
+    //     opacity: 0.8;
+    //     animation: fadeIn 1s 1.7s backwards;
+    //   }
+    //   content: "</h1>";
+    //   font-family: "La Belle Aurore";
+    //   color: #ffd700;
+    //   font-size: 18px;
+    //   position: absolute;
+    //   margin-top: 18px;
+    //   left: 20px;
+    //   animation: fadeIn 1s 1.7s backwards;
+    //   opacity: 0.6;
+    // }
+  }
+
+  .about-box {
+    width: 45%;
+    background-color: #dbc6f4;
+    padding: 20px;
+    border-radius: 12px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    font-family: "Questrial", sans-serif;
+    animation: fadeIn 5s 4s backwards;
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      color: #940db2;
+      font-family: "Lucida Handwriting", cursive;
+    }
+
+    .about-images {
+      margin-top: 0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      gap: 10px;
+    }
+
+    .about-images img {
+      width: calc((100% - 20px) / 3);
+      height: auto;
+      object-fit: contain;
+      animation-delay: 4.8s;
+    }
+  }
+  .about-box p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #634790;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    font-family: "Dancing Script", cursive;
+    margin-bottom: 0.8em;
+    padding: 0 30px;
+    animation-delay: 4.8s;
+  }
+
+  img {
+    width: 200px;
+
+    opacity: 0;
+    height: 200px;
+    animation: rotateIn 1s linear both;
+    animation-delay: 1.4s;
+  }
+}
+
+h2 {
+  color: #3503c9;
+  margin-top: 20px;
+  font-weight: 400;
+  font-size: 11px;
+  font-family: sans-serif;
+  letter-spacing: 3px;
+  animation: fadeIn 1s 1.8s backwards;
+}
+
+.flat-button {
+  color: #dba4e3;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  font-family: sans-serif;
+  text-decoration: none;
+  padding: 10px 18px;
+  border: 1px solid #b67fcf;
+  margin-top: 25px;
+  float: left;
+  animation: fadeIn 1s 1.8s 1s backwards;
+  white-space: nowrap;
+
+  &:hover {
+    background: #6a00ff;
+    color: #333;
+  }
+}
