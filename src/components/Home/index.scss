@@ -2,13 +2,21 @@
   width: 100%;
   min-height: 100vh;
   overflow-y: auto;
+  scroll-behavior: smooth;
+
+  // offset anchored sections so they aren't hidden behind the fixed top bar
+  #home,
+  #work-experience,
+  #projects {
+    scroll-margin-top: 90px;
+  }
 
   .home-content-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: flex-start; // align to top
     gap: 40px;
-    padding: 60px 5%; // give top padding so it's not touching the top
+    padding: 20px 5% 60px; // less top space, keep bottom/side padding
     box-sizing: border-box;
     flex-wrap: wrap; // helps on smaller screens
   }
@@ -77,12 +85,13 @@
 
   .about-box {
     width: 45%;
-    background-color: #dbc6f4;
-    padding: 20px;
+    background-color: #ebd8ff;
+    padding: 40px 28px;
+    margin-top: 50px; // push the box down from the top
     border-radius: 12px;
     color: #fff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    font-family: "Questrial", sans-serif;
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
     animation: fadeIn 5s 4s backwards;
 
     h2 {
@@ -91,21 +100,6 @@
       color: #940db2;
       font-family: "Lucida Handwriting", cursive;
     }
-
-    .about-images {
-      margin-top: 0;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: nowrap;
-      gap: 10px;
-    }
-
-    .about-images img {
-      width: calc((100% - 20px) / 3);
-      height: auto;
-      object-fit: contain;
-      animation-delay: 4.8s;
-    }
   }
   .about-box p {
     font-size: 16px;
@@ -113,7 +107,7 @@
     color: #634790;
     font-weight: 400;
     letter-spacing: 0.3px;
-    font-family: "Dancing Script", cursive;
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
     margin-bottom: 0.8em;
     padding: 0 30px;
     animation-delay: 4.8s;
@@ -126,6 +120,167 @@
     height: 200px;
     animation: rotateIn 1s linear both;
     animation-delay: 1.4s;
+  }
+}
+
+/* Experiences section styles */
+.experiences-section {
+  width: 100%;
+  padding: 60px 5%;
+  box-sizing: border-box;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(0, 0, 0, 0)
+  );
+
+  h2 {
+    font-size: 34px;
+    color: #561286;
+    margin-bottom: 32px;
+    font-family: "Lucida Handwriting", cursive;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+
+  .experiences-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    align-items: stretch;
+    max-width: 1300px;
+    margin: 0 auto;
+
+    // wrap to 2 columns on narrower screens, 1 on mobile
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Projects section has fewer, content-rich cards — show 2 across
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 1000px;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // institution logos, now shown below the work experience cards
+  .about-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin: 50px auto 0;
+    max-width: 900px;
+
+    img {
+      width: auto;
+      height: 130px;
+      object-fit: contain;
+      opacity: 0; // stay hidden until scrolled into view
+      animation: none;
+      cursor: pointer;
+      transition:
+        transform 0.3s ease,
+        filter 0.3s ease;
+    }
+
+    // triggered via IntersectionObserver when the row enters the viewport.
+    // `backwards` fill keeps them hidden during the staggered delay but
+    // releases `transform` once done, so the hover scale below can work.
+    &.in-view img {
+      opacity: 1;
+      animation: rotateIn 1s linear backwards;
+    }
+
+    &.in-view img:nth-of-type(1) {
+      animation-delay: 0.1s;
+    }
+    &.in-view img:nth-of-type(2) {
+      animation-delay: 0.3s;
+    }
+    &.in-view img:nth-of-type(3) {
+      animation-delay: 0.5s;
+    }
+
+    // hover effect: lift, enlarge, and add a soft shadow
+    img:hover {
+      transform: scale(1.12);
+      filter: drop-shadow(0 10px 18px rgba(58, 7, 95, 0.35));
+    }
+  }
+
+  .experience-card {
+    position: relative;
+    background: #ebd8ff;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 6px 18px rgba(99, 71, 144, 0.12);
+    color: #3a075f;
+    font-family: "Questrial", sans-serif;
+    border: 1px solid rgba(118, 38, 199, 0.12);
+    overflow: hidden;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+
+    // accent bar down the left edge
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, #7626c7, #ddb6f5);
+    }
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 30px rgba(99, 71, 144, 0.28);
+    }
+
+    h3 {
+      margin: 0 0 4px 0;
+      color: #3503c9;
+      font-size: 19px;
+      font-family: "Lucida Handwriting", cursive;
+    }
+
+    h4 {
+      margin: 0 0 14px 0;
+      color: #7626c7;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      line-height: 1.4;
+      font-family: "Questrial", sans-serif;
+      text-transform: none;
+      animation: none;
+    }
+
+    p {
+      margin: 0;
+      color: #634790;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .exp-meta {
+      margin: 0 0 12px 0;
+      color: #9a6fc4;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+    }
   }
 }
 
