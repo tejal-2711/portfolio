@@ -2,13 +2,12 @@ import LogoTitle from "../../assets/images/Tejal_picture.png";
 import LogoASU from "../../assets/images/asu.png";
 import LogoACIMS from "../../assets/images/acims.png";
 import LogoFulton from "../../assets/images/fulton.png";
-import { Link } from "react-router-dom";
 import "./index.scss";
 import AnimatedLetters from "../AnimatedLetters";
 import { useState, useRef, useEffect } from "react";
 
 const Home = () => {
-  const [letterClass, setLetterClass] = useState("text-animate");
+  const [letterClass] = useState("text-animate");
   const aboutImagesRef = useRef(null);
 
   useEffect(() => {
